@@ -1,0 +1,18 @@
+workflows:
+  ios-app:
+    name: iOS App
+    environment:
+      flutter: stable
+      xcode: latest
+      ios_signing:
+        distribution_type: development
+        bundle_identifier: "com.example.myApp"
+    scripts:
+      - name: Установка зависимостей
+        script: |
+          flutter pub get
+      - name: Сборка .ipa без подписи
+        script: |
+          flutter build ios --release --no-codesign
+    artifacts:
+      - build/ios/ipa/*.ipa
